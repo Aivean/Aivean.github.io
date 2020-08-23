@@ -206,13 +206,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
 
                 q.forEach((v, k) => {
-                    nodes.get(k).newL = 1 + 1 * v * v / initialValue / initialValue;
+                    nodes.get(k).newL = 1 + 1.5 * v * v / initialValue / initialValue;
 
                     for (var dir = 0; dir < 4; dir++) {
                         var nk = neighbourK(k, dir);
                         if (!nodes.has(nk)) continue;
                         var node = nodes.get(nk);
-                        node.newL = Math.max(node.newL, 1 + 0.5 * v * v / initialValue / initialValue)
+                        node.newL = Math.max(node.newL, 1 + 1 * v * v / initialValue / initialValue)
                     }
                 });
 
