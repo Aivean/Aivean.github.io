@@ -1,0 +1,132 @@
+@charset "UTF-8";
+
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+@font-face {
+    font-family: "retro-mono";
+    src: url("font/Web_Amstrad_PC.woff") format("woff"), url("font/Ac437_Amstrad_PC.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+html, body {
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: "retro-mono", monospace;
+}
+
+.container {
+    height: 100%;
+    position: relative;
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#center pre {
+    width: 1em;
+    height: 1em;
+    text-align: center;
+}
+
+.disable-select {
+    user-select: none; /* supported by Chrome and Opera */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+.cv {
+    margin-left: -4em;
+    margin-top: 0;
+    letter-spacing: 4px;
+
+    color: rgb(0, 178, 0);
+}
+
+.cv h1 {
+    color: white;
+}
+
+.cv h1, .cv h2, .cv li {
+    margin-bottom: 1em;
+}
+
+.cv li a {
+    text-decoration: none;
+    color: rgb(2, 255, 2);
+}
+
+.cv li a:hover, .cv li a:focus {
+    color: white;
+}
+
+.cv li:before {
+    content: "►";
+    padding-right: 1em;
+    color: white;
+}
