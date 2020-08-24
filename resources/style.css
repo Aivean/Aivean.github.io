@@ -130,3 +130,11 @@ html, body {
     padding-right: 1em;
     color: white;
 }
+
+footer {
+    position: absolute;
+    right: 0;
+    bottom: 1em;
+    background: black;
+    color: rgb(0, 80, 0);
+}

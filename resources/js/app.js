@@ -10,7 +10,10 @@ let D = {
     'H': (1 << 2) | (1 << 3)
 };
 
+let invDir = [1, 0, 3, 2];
+
 let cc = new Map([
+    ["○", D.H | D.V],
     ["─", D.H],
     ["┬", D.H | D.D],
     ["├", D.V | D.R],
@@ -117,6 +120,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
 
+            var q = new Map();
+            var q0 = new Map();
+            var initialValue = 10;
+            var affected = new Set();
+
             var c = document.getElementById("center");
 
             gi.layer[0].forEach((v, k) => {
@@ -128,6 +136,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     var tag = document.createElement("pre");
                     tag.innerText = v.char;
                     tag.style.position = "absolute";
+
+                    tag.addEventListener("click", () => {
+                        q.set(k, initialValue);
+                        return false;
+                    });
 
                     tag.style.left = "" + ((x - gi.width / 2)) + "em";
                     tag.style.top = "" + (y - gi.height / 2) + "em";
@@ -153,23 +166,20 @@ document.addEventListener('DOMContentLoaded', function () {
                         "fg": fg
                     });
 
-                    if (v.char !== ' ') {
+                    if (v.char === '○') {
                         keysWithChars.push(k);
                     }
                 }
             });
 
-
-            var q = new Map();
-            var q0 = new Map();
-            var initialValue = 10;
-
-            var affected = new Set();
+            // keysWithChars.forEach(k => {
+            //     q.set(k, Math.floor(initialValue / 2));
+            // })
 
             setInterval(() => {
-                if (!q.size && Math.random() * 100 < 3) {
-                    q.set(keysWithChars[Math.floor(Math.random() * keysWithChars.length)], initialValue);
-                }
+                // if (!q.size && Math.random() * 100 < 3) {
+                //     q.set(keysWithChars[Math.floor(Math.random() * keysWithChars.length)], initialValue);
+                // }
 
                 affected.clear();
                 q0.clear();
@@ -182,12 +192,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         if (!nodes.has(nk)) continue;
                         affected.add(nk);
                         if (v === initialValue && nodes.get(nk).char !== ' ' &&
-                            charConnected(nodes.get(k).char, dir) && !q.has(nk)) {
+                            charConnected(nodes.get(k).char, dir) &&
+                            charConnected(nodes.get(nk).char, invDir[dir]) &&
+                            !q.has(nk)) {
                             q0.set(nk, initialValue)
                         }
                     }
                 });
-
 
                 var tmp = q0;
                 q0 = q;
@@ -201,18 +212,46 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 });
 
+                keysWithChars.forEach((k) => {
+                    affected.add(k);
+                    for (var dir = 0; dir < 4; dir++) {
+                        var nk = neighbourK(k, dir);
+                        if (!nodes.has(nk)) continue;
+                        affected.add(nk);
+                    }
+                });
+
                 affected.forEach(k => {
                     nodes.get(k).newL = 1
                 });
 
-                q.forEach((v, k) => {
-                    nodes.get(k).newL = 1 + 1.5 * v * v / initialValue / initialValue;
+                let lightUp = (k, v) => {
+                    nodes.get(k).newL =
+                        Math.max(1 + 1.5 * v * v / initialValue / initialValue, nodes.get(k).newL);
 
                     for (var dir = 0; dir < 4; dir++) {
                         var nk = neighbourK(k, dir);
                         if (!nodes.has(nk)) continue;
                         var node = nodes.get(nk);
                         node.newL = Math.max(node.newL, 1 + 1 * v * v / initialValue / initialValue)
+                    }
+                }
+
+                q.forEach((v, k) => {
+                    lightUp(k,v);
+                });
+
+                let time = new Date().getTime();
+
+                keysWithChars.forEach((k, i) => {
+                    let v = (Math.sin(
+                        ((i + time / 200) % keysWithChars.length) / keysWithChars.length * Math.PI * 4
+                    ) + 1) / 2;
+
+                    lightUp(k, Math.floor(v * initialValue / 2));
+
+                    if (!q.size && v > 0.9 && Math.random() * 200 < 3) {
+                        q.set(k, Math.floor(initialValue));
                     }
                 });
 
