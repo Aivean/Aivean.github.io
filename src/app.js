@@ -242,7 +242,7 @@ function animate() {
                 ((i + time / 200) % keysWithChars.length) / keysWithChars.length * Math.PI * 4
             ) + 1) / 2;
 
-            lightUp(k, Math.floor(v * initialValue / 2));
+            lightUp(k, Math.floor(v * initialValue * 3 / 4));
 
             if (!q.size && v > 0.9 && Math.random() * 200 < 3) {
                 q.set(k, Math.floor(initialValue));
