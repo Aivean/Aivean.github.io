@@ -3,19 +3,28 @@
 <head>
     <title>Ivan Zaitsev</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="resources/style.css">
     <link rel="apple-touch-icon" sizes="180x180" href="resources/icon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="resources/icon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="resources/icon/favicon-16x16.png">
     <link rel="manifest" href="resources/icon/site.webmanifest">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <meta name="Description" content="Ivan Zaitsev is a software engineer specializing in JVM, JS and Python.">
+    <meta name="theme-color" content="black"/>
+    <style>
+        @font-face {
+            font-family: "retro-mono";
+            src: url("resources/font/Web_Amstrad_PC.woff") format("woff"), url("resources/font/Ac437_Amstrad_PC.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+    </style>
+    <link rel="stylesheet" href="resources/style.css">
 </head>
 <body>
 
 <div class="container">
-    <div class="center disable-select" id="center">
-        <%= require('./ss_render.js') %>
-    </div>
-    <div class="center" style="position: absolute;">
+    <div class="center" style="position: absolute; z-index: 10000;">
         <main class="cv">
             <h1>Ivan Zaitsev</h1>
             <h2>Software Engineer</h2>
@@ -27,6 +36,9 @@
                 <li><a href="https://github.com/Aivean" title="Ivan Zaitsev on Github">Github</a></li>
             </ul>
         </main>
+    </div>
+    <div class="center disable-select" id="center">
+        <%= require('./ss_render.js') %>
     </div>
 </div>
 <footer>Ivan Zaitsev © 2020</footer>

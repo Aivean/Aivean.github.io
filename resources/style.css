@@ -54,15 +54,6 @@ table {
     border-spacing: 0;
 }
 
-
-@font-face {
-    font-family: "retro-mono";
-    src: url("font/Web_Amstrad_PC.woff") format("woff"), url("font/Ac437_Amstrad_PC.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
-}
-
-
 html, body {
     background-color: black;
     color: white;
@@ -75,6 +66,7 @@ html, body {
 .container {
     height: 100%;
     position: relative;
+    overflow: hidden;
 }
 
 .center {
